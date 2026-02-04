@@ -1,11 +1,32 @@
 const express = require('express');
+const morgan = require('morgan');
+const multer = require('multer');
 const postModel = require('./models/post.model');
+const uploadImage = require('./services/storage.service');
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(express.json());
 
-app.post('/api/create-post', (req, res) => {
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.post('/api/create-post', upload.single('image'), async (req, res) => {
+
+    const { buffer } = req.file;
+    const { caption } = req.body;
+
+    const result = await uploadImage(buffer);
+
+    const post = await postModel.create({
+        image: result.url,
+        caption
+    });
+
+    res.status(201).json({
+        message: "Post created successfully",
+        post
+    });
 
 });
 
