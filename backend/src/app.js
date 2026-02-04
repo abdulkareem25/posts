@@ -27,11 +27,16 @@ app.post('/api/create-post', upload.single('image'), async (req, res) => {
         message: "Post created successfully",
         post
     });
-
 });
 
-app.get('/api/all-posts', (req, res) => {
+app.get('/api/all-posts', async (req, res) => {
 
+    const posts = await postModel.find();
+
+    res.status(200).json({
+        message:"All posts fetched successfully",
+        posts
+    });
 });
 
 
