@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-    image: String,
-    caption: String
+    image: { type: String, required: true },
+    caption: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
 });
 
 const postModel = mongoose.model('posts', postSchema);

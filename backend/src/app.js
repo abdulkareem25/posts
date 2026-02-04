@@ -5,11 +5,11 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/create-post', (req, res) => {
+app.post('/api/create-post', (req, res) => {
 
 });
 
-app.get('/all-posts', (req, res) => {
+app.get('/api/all-posts', (req, res) => {
 
 });
 
