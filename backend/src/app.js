@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const multer = require('multer');
+const cors = require('cors');
 const postModel = require('./models/post.model');
 const uploadImage = require('./services/storage.service');
 
 const app = express();
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
